@@ -325,8 +325,9 @@ the new algorithm is confusing, like in python or ruby."
         evil-snipe-aliases '((?\[ "[[{(]")
                              (?\] "[]})]")
                              (?\; "[;:]")))
-  (add-hook 'doom-post-init-hook #'evil-snipe-mode)
-  (add-hook 'doom-post-init-hook #'evil-snipe-override-mode))
+  ;(add-hook 'doom-post-init-hook #'evil-snipe-mode)
+  ;(add-hook 'doom-post-init-hook #'evil-snipe-override-mode)
+  )
 
 
 (def-package! evil-surround
