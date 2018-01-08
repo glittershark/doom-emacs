@@ -6,13 +6,12 @@
   :config
   ;; disable standard config; more disruptive than it needs to be
   (dolist (beg '("fn" "do" "def" "defp" "defmodule" "if" "unless" "case" "receive"))
-    (sp-local-pair 'elixir-mode beg nil :actions :rem))
+    (sp-local-pair 'elixir-mode beg nil :actions '(:rem)))
   ;; only complete the basics
   (sp-with-modes 'elixir-mode
     (sp-local-pair "do" "end" :when '(("RET" "<evil-ret>")) :post-handlers '("||\n[i]"))
     (sp-local-pair "do " " end")
     (sp-local-pair "fn " " end")))
-
 
 (def-package! alchemist
   :after elixir-mode
