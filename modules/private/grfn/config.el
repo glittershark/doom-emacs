@@ -83,6 +83,7 @@
 ;;             (hook-name)
 ;;             (symbol-name mode)))))
 
+(require 'doom-themes)
 
 (after! doom-theme
   (set-face-foreground 'font-lock-doc-face +solarized-s-base1))
@@ -94,14 +95,31 @@
   (setq evil-shift-width 2))
 
 (after! org
-  (setq org-directory (expand-file-name "~/notes"))
-  (setq org-default-notes-file (concat org-directory "/inbox.org")))
+  (setq org-directory (expand-file-name "~/notes")
+        org-default-notes-file (concat org-directory "/inbox.org")
+        org-agenda-files (list (expand-file-name "~/notes"))
+        org-refile-targets '((org-agenda-files :maxlevel . 1))
+        org-file-apps `((auto-mode . emacs)
+                        (,(rx (or (and "." (optional "x") (optional "htm") (optional "l") buffer-end)
+                                  (and buffer-start "http" (optional "s") "://")))
+                         . "firefox %s")
+                        (,(rx ".pdf" buffer-end) . "apvlv %s")
+                        (,(rx "." (or "png"
+                                      "jpg"
+                                      "jpeg"
+                                      "gif"
+                                      "tif"
+                                      "tiff")
+                              buffer-end)
+                         . "feh %s")))
+  (setf (alist-get 'file org-link-frame-setup) 'find-file-other-window))
 
 (after! ivy
   (setq ivy-re-builders-alist
         '((t . ivy--regex-fuzzy))))
 
-(setq doom-font (font-spec :family "Meslo LG S DZ" :size 10)
+(setq doom-font (font-spec :family "Meslo LGSDZ Nerd Font" :size 14)
+      doom-big-font (font-spec :family "Meslo LGSDZ Nerd Font" :size 19)
       doom-variable-pitch-font (font-spec :family "DejaVu Sans")
       doom-unicode-font (font-spec :family "Meslo LG S DZ"))
 
@@ -111,4 +129,10 @@
   (add-hook! emacs-lisp-mode #'paxedit-mode)
   (add-hook! clojure-mode #'paxedit-mode))
 
+(require 'haskell)
+
+(add-hook! haskell-mode
+  (flycheck-add-next-checker
+   'intero
+   'haskell-hlint))
 

@@ -120,10 +120,15 @@
 
              (elixir-attribute-face ((t (:foreground ,+solarized-blue))))
              (elixir-atom-face ((t (:foreground ,+solarized-cyan))))
-             (linum ((t (:background ,+solarized-s-base2 :foreground ,+solarized-s-base1))))))
+             (linum ((t (:background ,+solarized-s-base2 :foreground ,+solarized-s-base1))))
+
+             (haskell-operator-face ((t (:foreground ,+solarized-green))))
+             (haskell-keyword-face ((t (:foreground ,+solarized-cyan))))))
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (load-theme 'grfn-solarized-light t)
+
+(defface haskell-import-face `((t (:foreground ,+solarized-magenta))) "")
 
 (setq doom-theme 'grfn-solarized-light)
 
@@ -146,6 +151,8 @@
                "defmodule"
                "defstruct"
                "defdelegate"
+               "defprotocol"
+               "defimpl"
                "use"
                "import"
                "alias"
@@ -155,6 +162,31 @@
                "assert_raise")
     .
     'font-lock-preprocessor-face)))
+
+(font-lock-add-keywords
+ 'elixir-mode
+ `((,(rx-words "def"
+               "defp"
+               "test"
+               "describe"
+               "property"
+               "defrecord"
+               "defmodule"
+               "defstruct"
+               "defdelegate"
+               "use"
+               "import"
+               "alias"
+               "require"
+               "assert"
+               "refute"
+               "assert_raise")
+    .
+    'font-lock-preprocessor-face)))
+
+(font-lock-add-keywords
+ 'haskell-mode
+ `((,(rx-words "import") . 'haskell-import-face)))
 
 ;;; * Column Marker
 (defun sanityinc/fci-enabled-p () (symbol-value 'fci-mode))

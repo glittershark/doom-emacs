@@ -5,7 +5,7 @@
   :mode "\\.elixir2$"
   :config
   ;; disable standard config; more disruptive than it needs to be
-  (dolist (beg '("fn" "do" "def" "defp" "defmodule" "if" "unless" "case" "receive"))
+  (dolist (beg '("fn" "do" "def" "defp" "defmodule" "defimpl" "defprotocol" "if" "unless" "case" "receive"))
     (sp-local-pair 'elixir-mode beg nil :actions '(:rem)))
   ;; only complete the basics
   (sp-with-modes 'elixir-mode

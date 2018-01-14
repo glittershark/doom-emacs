@@ -1,4 +1,4 @@
-;;; private/grfn/+bindings.el -*- lexical-binding: t; -*-
+;; private/grfn/+bindings.el -*- lexical-binding: t; -*-
 
 (load! utils)
 
@@ -126,8 +126,8 @@
 
  "C-x p"     #'doom/other-popup
 
- :n "K" #'+jump/documentation
- :n "g d" #'+jump/definition
+ :n "K" #'+lookup/documentation
+ :n "g d" #'+lookup/definition
 
 
  ;; --- <leader> -------------------------------------
@@ -177,7 +177,7 @@
      :desc "Swiper"                :nv "/" #'swiper
      :desc "Imenu"                 :nv "i" #'imenu
      :desc "Imenu across buffers"  :nv "I" #'imenu-anywhere
-     :desc "Online providers"      :nv "o" #'+jump/online-select)
+     :desc "Online providers"      :nv "o" #'+lookup/online-select)
 
    (:desc "workspace" :prefix "TAB"
      :desc "Display tab bar"          :n "TAB" #'+workspace/display
@@ -223,8 +223,8 @@
                                        :v  "e" #'+eval/region
      :desc "Evaluate & replace region" :nv "E" #'+eval:replace-region
      :desc "Build tasks"               :nv "b" #'+eval/build
-     :desc "Jump to definition"        :n  "d" #'+jump/definition
-     :desc "Jump to references"        :n  "D" #'+jump/references
+     :desc "Jump to definition"        :n  "d" #'+lookup/definition
+     :desc "Jump to references"        :n  "D" #'+lookup/references
      :desc "Open REPL"                 :n  "r" #'+eval/open-repl
                                        :v  "r" #'+eval:repl)
 
@@ -270,9 +270,9 @@
      :desc "Describe face"         :n  "F" #'describe-face
      :desc "Describe DOOM setting" :n  "s" #'doom/describe-setting
      :desc "Describe DOOM module"  :n  "d" #'doom/describe-module
-     :desc "Find definition"       :n  "." #'+jump/definition
-     :desc "Find references"       :n  "/" #'+jump/references
-     :desc "Find documentation"    :n  "h" #'+jump/documentation
+     :desc "Find definition"       :n  "." #'+lookup/definition
+     :desc "Find references"       :n  "/" #'+lookup/references
+     :desc "Find documentation"    :n  "h" #'+lookup/documentation
      :desc "What face"             :n  "'" #'doom/what-face
      :desc "What minor modes"      :n  ";" #'doom/what-minor-mode
      :desc "Info"                  :n  "i" #'info
@@ -380,9 +380,9 @@
  :n  "[w" #'+workspace/switch-left
  :m  "gt" #'+workspace/switch-right
  :m  "gT" #'+workspace/switch-left
- :m  "gd" #'+jump/definition
- :m  "gD" #'+jump/references
- :m  "K" #'+jump/documentation
+ :m  "gd" #'+lookup/definition
+ :m  "gD" #'+lookup/references
+ :m  "K" #'+lookup/documentation
  :n  "gp" #'+evil/reselect-paste
  :n  "gr" #'+eval:region
  :n  "gR" #'+eval/buffer
@@ -721,6 +721,14 @@
      :n "g \\"  #'alchemist-mix-test-at-point
      :n "g SPC" #'alchemist-mix-compile))
 
+ ;; Haskell
+ (:after haskell-mode
+   (:map haskell-mode-map
+     :n "K"     #'intero-info
+     :n "g d"   #'intero-goto-definition
+     :n "g SPC" #'intero-repl-load
+     :n "g y"   #'intero-type-at))
+
  ;; Elisp
  (:map emacs-lisp-mode-map
    :n "g SPC" #'eval-buffer)
@@ -925,4 +933,28 @@
             "(" 'sp-backward-slurp-sexp
             "I" 'grfn/insert-at-sexp-start
             "a" 'grfn/insert-at-form-start))
+
+(require 'doom-themes)
+(require 'haskell)
+
+(defun grfn/haskell-test-file-p ()
+  (string-match-p (rx (and "Spec.hs" eol))
+                  (buffer-file-name)))
+
+(defun grfn/intero-run-main ()
+  (interactive)
+  (intero-repl-load)
+  (intero-with-repl-buffer nil
+    (comint-simple-send
+     (get-buffer-process (current-buffer))
+     "main")))
+
+(map!
+  (:map haskell-mode-map
+     :n "K"     'intero-info
+     :n "g d"   'intero-goto-definition
+     :n "g SPC" 'intero-repl-load
+     :n "g \\"  'intero-repl
+     :n "g y"   'intero-type-at
+     :n "g RET" 'grfn/intero-run-main))
 

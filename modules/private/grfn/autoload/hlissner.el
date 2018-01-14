@@ -1,4 +1,4 @@
-;;; private/hlissner/autoload/hlissner.el -*- lexical-binding: t; -*-
+;;; private/grfn/autoload/hlissner.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun +hlissner/install-snippets ()
@@ -32,22 +32,22 @@ private/hlissner/snippets."
        (let ((default-directory ,dir))
          (call-interactively (command-remapping #'find-file))))))
 
-;;;###autoload (autoload '+hlissner/find-in-templates "private/hlissner/autoload/hlissner" nil t)
-;;;###autoload (autoload '+hlissner/browse-templates "private/hlissner/autoload/hlissner" nil t)
+;;;###autoload (autoload '+hlissner/find-in-templates "private/grfn/autoload/hlissner" nil t)
+;;;###autoload (autoload '+hlissner/browse-templates "private/grfn/autoload/hlissner" nil t)
 (+hlissner-def-finder! templates +file-templates-dir)
 
-;;;###autoload (autoload '+hlissner/find-in-snippets "private/hlissner/autoload/hlissner" nil t)
-;;;###autoload (autoload '+hlissner/browse-snippets "private/hlissner/autoload/hlissner" nil t)
+;;;###autoload (autoload '+hlissner/find-in-snippets "private/grfn/autoload/hlissner" nil t)
+;;;###autoload (autoload '+hlissner/browse-snippets "private/grfn/autoload/hlissner" nil t)
 (+hlissner-def-finder! snippets +hlissner-snippets-dir)
 
-;;;###autoload (autoload '+hlissner/find-in-dotfiles "private/hlissner/autoload/hlissner" nil t)
-;;;###autoload (autoload '+hlissner/browse-dotfiles "private/hlissner/autoload/hlissner" nil t)
+;;;###autoload (autoload '+hlissner/find-in-dotfiles "private/grfn/autoload/hlissner" nil t)
+;;;###autoload (autoload '+hlissner/browse-dotfiles "private/grfn/autoload/hlissner" nil t)
 (+hlissner-def-finder! dotfiles (expand-file-name ".dotfiles" "~"))
 
-;;;###autoload (autoload '+hlissner/find-in-emacsd "private/hlissner/autoload/hlissner" nil t)
-;;;###autoload (autoload '+hlissner/browse-emacsd "private/hlissner/autoload/hlissner" nil t)
+;;;###autoload (autoload '+hlissner/find-in-emacsd "private/grfn/autoload/hlissner" nil t)
+;;;###autoload (autoload '+hlissner/browse-emacsd "private/grfn/autoload/hlissner" nil t)
 (+hlissner-def-finder! emacsd doom-emacs-dir)
 
-;;;###autoload (autoload '+hlissner/find-in-notes "private/hlissner/autoload/hlissner" nil t)
-;;;###autoload (autoload '+hlissner/browse-notes "private/hlissner/autoload/hlissner" nil t)
+;;;###autoload (autoload '+hlissner/find-in-notes "private/grfn/autoload/hlissner" nil t)
+;;;###autoload (autoload '+hlissner/browse-notes "private/grfn/autoload/hlissner" nil t)
 (+hlissner-def-finder! notes +org-dir)
