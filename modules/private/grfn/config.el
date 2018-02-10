@@ -6,7 +6,9 @@
 ;;
 (when (featurep! :feature evil)
   (load! +bindings)
-  (load! +commands)) ; my custom ex commands
+  (load! +commands))
+
+(load! +private)
 
 
 ;;
@@ -135,4 +137,7 @@
   (flycheck-add-next-checker
    'intero
    'haskell-hlint))
+
+(add-hook! org-mode
+  (org-clubhouse-mode))
 

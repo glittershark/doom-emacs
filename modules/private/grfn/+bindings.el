@@ -283,11 +283,14 @@
      :desc "From snippet"          :nv "s" #'yas-insert-snippet)
 
    (:desc "notes" :prefix "n"
-     :desc "Find file in notes"    :n  "n" #'+hlissner/find-in-notes
-     :desc "Browse notes"          :n  "N" #'+hlissner/browse-notes
-     :desc "Org capture"           :n  "x" #'+org-capture/open
-     :desc "Browse mode notes"     :n  "m" #'+org/browse-notes-for-major-mode
-     :desc "Browse project notes"  :n  "p" #'+org/browse-notes-for-project)
+     :desc "Agenda"                 :n  "a" #'org-agenda
+     :desc "Find file in notes"     :n  "n" #'+hlissner/find-in-notes
+     :desc "Store link"             :n  "l" #'org-store-link
+     :desc "Browse notes"           :n  "N" #'+hlissner/browse-notes
+     :desc "Org capture"            :n  "x" #'+org-capture/open
+     :desc "Browse mode notes"      :n  "m" #'+org/browse-notes-for-major-mode
+     :desc "Browse project notes"   :n  "p" #'+org/browse-notes-for-project
+     :desc "Create clubhouse story" :n "c" #'org-clubhouse-create-story)
 
    (:desc "open" :prefix "o"
      :desc "Default browser"       :n  "b" #'browse-url-of-file

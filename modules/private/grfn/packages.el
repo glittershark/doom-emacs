@@ -10,8 +10,11 @@
            :fetcher github
            :repo "noctuid/general.el"))
 
-;; Lisp utils
+;; Elisp
 (package! dash)
+(package! dash-functional)
+(package! s)
+(package! request)
 
 ;; Rust
 (package! cargo)
