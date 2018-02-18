@@ -100,24 +100,53 @@
   (setq evil-shift-width 2))
 
 (after! org
-  (setq org-directory (expand-file-name "~/notes")
-        org-default-notes-file (concat org-directory "/inbox.org")
-        org-agenda-files (list (expand-file-name "~/notes"))
-        org-refile-targets '((org-agenda-files :maxlevel . 1))
-        org-file-apps `((auto-mode . emacs)
-                        (,(rx (or (and "." (optional "x") (optional "htm") (optional "l") buffer-end)
-                                  (and buffer-start "http" (optional "s") "://")))
-                         . "firefox %s")
-                        (,(rx ".pdf" buffer-end) . "apvlv %s")
-                        (,(rx "." (or "png"
-                                      "jpg"
-                                      "jpeg"
-                                      "gif"
-                                      "tif"
-                                      "tiff")
-                              buffer-end)
-                         . "feh %s")))
+  (setq
+   org-directory (expand-file-name "~/notes")
+   +org-dir (expand-file-name "~/notes")
+   org-default-notes-file (concat org-directory "/inbox.org")
+   +org-default-todo-file (concat org-directory "/inbox.org")
+   org-agenda-files (list (expand-file-name "~/notes"))
+   org-refile-targets '((org-agenda-files :maxlevel . 1))
+   org-file-apps `((auto-mode . emacs)
+                   (,(rx (or (and "." (optional "x") (optional "htm") (optional "l") buffer-end)
+                             (and buffer-start "http" (optional "s") "://")))
+                    . "firefox %s")
+                   (,(rx ".pdf" buffer-end) . "apvlv %s")
+                   (,(rx "." (or "png"
+                                 "jpg"
+                                 "jpeg"
+                                 "gif"
+                                 "tif"
+                                 "tiff")
+                         buffer-end)
+                    . "feh %s"))
+   org-log-done 'time
+   org-archive-location "~/notes/trash::* From %s"
+   org-cycle-separator-lines 2
+   org-hidden-keywords '(title)
+   org-tags-column -130
+   org-ellipsis "⤵"
+   org-capture-templates
+   '(("t" "Todo" entry
+      (file+headline +org-default-todo-file "Inbox")
+      "* TODO %?\n%i" :prepend t :kill-buffer t)
+
+     ("n" "Notes" entry
+      (file+headline +org-default-notes-file "Inbox")
+      "* %u %?\n%i" :prepend t :kill-buffer t)))
+  (set-face-foreground 'org-block +solarized-s-base00)
+  (add-hook! org-mode
+    (add-hook! evil-normal-state-entry-hook
+      #'org-align-all-tags))
   (setf (alist-get 'file org-link-frame-setup) 'find-file-other-window))
+
+(after! magit
+  (setq git-commit-summary-max-length 50))
+
+(comment
+
+ (string-match-p "(?!foo).*" "bar")
+ )
 
 (after! ivy
   (setq ivy-re-builders-alist
