@@ -64,6 +64,42 @@
 
 (load! splitjoin)
 
+(defun +hlissner/install-snippets ()
+  "Install my snippets from https://github.com/hlissner/emacs-snippets into
+private/hlissner/snippets."
+  (interactive)
+  (doom-fetch :github "hlissner/emacs-snippets"
+              (expand-file-name "snippets" (doom-module-path :private 'hlissner))))
+
+(defun +hlissner/yank-buffer-filename ()
+  "Copy the current buffer's path to the kill ring."
+  (interactive)
+  (if-let* ((filename (or buffer-file-name (bound-and-true-p list-buffers-directory))))
+      (message (kill-new (abbreviate-file-name filename)))
+    (error "Couldn't find filename in current buffer")))
+
+(defmacro +hlissner-def-finder! (name dir)
+  "Define a pair of find-file and browse functions."
+  `(progn
+     (defun ,(intern (format "+hlissner/find-in-%s" name)) ()
+       (interactive)
+       (let ((default-directory ,dir)
+             projectile-project-name
+             projectile-require-project-root
+             projectile-cached-buffer-file-name
+             projectile-cached-project-root)
+         (call-interactively (command-remapping #'projectile-find-file))))
+     (defun ,(intern (format "+hlissner/browse-%s" name)) ()
+       (interactive)
+       (let ((default-directory ,dir))
+         (call-interactively (command-remapping #'find-file))))))
+
+(+hlissner-def-finder! templates +file-templates-dir)
+(+hlissner-def-finder! snippets +grfn-snippets-dir)
+(+hlissner-def-finder! dotfiles (expand-file-name ".dotfiles" "~"))
+(+hlissner-def-finder! emacsd doom-emacs-dir)
+(+hlissner-def-finder! notes +org-dir)
+
 ;;;
 
 (map!
