@@ -171,7 +171,8 @@ private/hlissner/snippets."
    :desc "Ex command"              :nv ";"  #'evil-ex
    :desc "M-x"                     :nv ":"  #'execute-extended-command
    :desc "Pop up scratch buffer"   :nv "x"  #'doom/open-scratch-buffer
-   :desc "Org Capture"             :nv "X"  #'+org-capture/open
+   :desc "Org Capture"             :nv "X"  #'org-capture
+   :desc "Org Capture"             :nv "a"  #'+org-capture/open
 
    ;; Most commonly used
    :desc "Find file in project"    :n "SPC" #'projectile-find-file
@@ -288,6 +289,7 @@ private/hlissner/snippets."
      :desc "Git revert buffer"     :n  "R" #'vc-revert
      ;; :desc "List gists"            :n  "g" #'+gist:list
      :desc "Git grep"              :n  "g" #'counsel-git-grep
+     :desc "Checkout Branch"       :n  "c" #'counsel-git-checkout
      :desc "Next hunk"             :nv "]" #'git-gutter:next-hunk
      :desc "Previous hunk"         :nv "[" #'git-gutter:previous-hunk)
 
@@ -326,7 +328,8 @@ private/hlissner/snippets."
      :desc "Org capture"            :n  "x" #'+org-capture/open
      :desc "Browse mode notes"      :n  "m" #'+org/browse-notes-for-major-mode
      :desc "Browse project notes"   :n  "p" #'+org/browse-notes-for-project
-     :desc "Create clubhouse story" :n "c" #'org-clubhouse-create-story)
+     :desc "Create clubhouse story" :n  "c" #'org-clubhouse-create-story
+     :desc "Archive subtree"        :n  "k" #'org-archive-subtree)
 
    (:desc "open" :prefix "o"
      :desc "Default browser"       :n  "b" #'browse-url-of-file
