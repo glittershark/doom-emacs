@@ -328,7 +328,7 @@ If unset all projects will be synchronized")
     (org-set-property "clubhouse-project"
                       (org-make-link-string
                        (org-clubhouse-link-to-project project-id)
-                       (alist-get project-id (org-clubhouse-project))))
+                       (alist-get project-id (org-clubhouse-projects))))
 
     (org-todo "TODO")))
 
