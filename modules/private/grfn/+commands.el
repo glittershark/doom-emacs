@@ -1,4 +1,4 @@
-;;; private/hlissner/+commands.el -*- lexical-binding: t; -*-
+;;; private/grfn/+commands.el -*- lexical-binding: t; -*-
 
 (defalias 'ex! 'evil-ex-define-cmd)
 
