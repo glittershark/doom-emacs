@@ -85,6 +85,9 @@
 ;;             (hook-name)
 ;;             (symbol-name mode)))))
 
+(setq solarized-use-variable-pitch nil
+      solarized-scale-org-headlines nil)
+
 (require 'doom-themes)
 
 (after! doom-theme
