@@ -238,3 +238,7 @@
 
   (add-hook 'prog-mode-hook #'eos/add-fci-disabling-hook))
 
+; (require 'haskell-prettify)
+
+;; (add-hook 'haskell-mode-hook #'haskell-prettify-enable)
+

@@ -157,7 +157,7 @@
       doom-variable-pitch-font (font-spec :family "DejaVu Sans")
       doom-unicode-font (font-spec :family "Meslo LG S DZ"))
 
-(add-hook! before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (after! paxedit
   (add-hook! emacs-lisp-mode #'paxedit-mode)
@@ -165,11 +165,18 @@
 
 (require 'haskell)
 
+(let ((m-symbols
+      '(("`mappend`" . "⊕")
+        ("<>"        . "⊕"))))
+  (dolist (item m-symbols) (add-to-list 'haskell-font-lock-symbols-alist item)))
+
+(setq haskell-font-lock-symbols t)
+
 (add-hook! haskell-mode
   (flycheck-add-next-checker
    'intero
    'haskell-hlint))
 
-(add-hook! org-mode
-  (org-clubhouse-mode))
+(load! org-clubhouse)
+(add-hook! org-mode #'org-clubhouse-mode)
 
