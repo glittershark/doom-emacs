@@ -14,6 +14,7 @@ ede-projects.el
 tramp
 smex-items
 network-security.data
+magithub/cache
 
 # compiled files
 *.elc

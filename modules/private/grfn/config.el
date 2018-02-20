@@ -180,3 +180,12 @@
 (load! org-clubhouse)
 (add-hook! org-mode #'org-clubhouse-mode)
 
+(load! slack-snippets)
+
+(after! magit
+  (require 'evil-magit)
+  (require 'magithub))
+
+(require 'auth-password-store)
+(auth-pass-enable)
+

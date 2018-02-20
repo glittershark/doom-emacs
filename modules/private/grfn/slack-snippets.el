@@ -212,3 +212,5 @@
        (slack/post-message
         :text       (format "```\n%s```" snippet-text)
         :channel-id channel-id)))))
+
+(provide 'slack-snippets)

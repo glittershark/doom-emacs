@@ -10,6 +10,11 @@
            :fetcher github
            :repo "noctuid/general.el"))
 
+;; Git
+(package! evil-magit)
+(package! magithub)
+(package! auth-password-store)
+
 ;; Elisp
 (package! dash)
 (package! dash-functional)
