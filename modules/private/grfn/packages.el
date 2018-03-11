@@ -32,3 +32,8 @@
 ;; Lisp
 (package! paxedit)
 
+;; Javascript
+(package! flow-minor-mode)
+(package! flycheck-flow)
+(package! company-flow)
+(package! prettier-js)

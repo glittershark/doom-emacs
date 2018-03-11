@@ -771,6 +771,17 @@ private/hlissner/snippets."
      :n "g SPC" #'intero-repl-load
      :n "g y"   #'intero-type-at))
 
+ ;; Javascript
+ ;; (:after rjsx-mode
+ ;;   (:map rjsx-mode-map
+ ;;     :n "g d" #'flow-minor-jump-to-definition
+ ;;     :n "K"   #'flow-minor-type-at-pos))
+
+ (:after js2-mode
+   (:map js2-mode-map
+     :n "g d" #'flow-minor-jump-to-definition
+     :n "K"   #'flow-minor-type-at-pos))
+
  ;; Elisp
  (:map emacs-lisp-mode-map
    :n "g SPC" #'eval-buffer)

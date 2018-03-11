@@ -189,3 +189,24 @@
 (require 'auth-password-store)
 (auth-pass-enable)
 
+;;; Javascript
+
+(setq js-indent-level 2)
+
+(require 'prettier-js)
+(after! prettier-js
+  (add-hook! rjsx-mode #'prettier-js-mode)
+  (add-hook! js2-mode  #'prettier-js-mode)
+  (add-hook! json-mode #'prettier-js-mode)
+  (add-hook! css-mode  #'prettier-js-mode))
+
+(require 'flycheck-flow)
+(with-eval-after-load 'flycheck
+  (flycheck-add-mode 'javascript-flow 'rjsx-mode)
+  (flycheck-add-mode 'javascript-flow 'flow-minor-mode)
+  (flycheck-add-mode 'javascript-eslint 'flow-minor-mode)
+  (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
+
+(require 'flow-minor-mode)
+
+
